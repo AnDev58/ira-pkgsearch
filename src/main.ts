@@ -1,24 +1,44 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import indexPage from "./pages/index.htm?raw";
+import "./styles/color.css";
+import "./styles/style.css";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+let icon = document.querySelector<HTMLSpanElement>(
+  "#special-mode>.material-symbols-outlined"
+)!;
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+function retrieve_theme() {
+  var theme = localStorage.getItem("color_scheme");
+  if (theme != null) {
+    document.body.classList.remove("light_mode", "dark_mode");
+    let mode = theme + "_mode";
+    document.body.classList.add(mode);
+    icon.textContent = mode;
+  }
+}
+
+(function () {
+  let data = new DOMParser().parseFromString(indexPage, "text/html");
+  document.getElementById("app")?.appendChild(data.documentElement);
+
+  retrieve_theme();
+
+  window.addEventListener(
+    "storage",
+    function () {
+      retrieve_theme();
+    },
+    false
+  );
+
+  document.getElementById("special-mode")?.addEventListener("click", (ev) => {
+    ev.preventDefault();
+    document.body.classList.toggle("dark_mode");
+
+    if (document.body.classList.contains("dark_mode")) {
+      localStorage.setItem("color_scheme", "dark");
+    } else {
+      localStorage.setItem("color_scheme", "light");
+    }
+    icon.textContent = localStorage.getItem("color_scheme") + "_mode";
+  });
+})();
