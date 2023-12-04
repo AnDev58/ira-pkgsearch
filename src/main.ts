@@ -1,4 +1,5 @@
-import indexPage from "./pages/index.htm?raw";
+import { renderPage } from "./utils/spa";
+
 import "./styles/color.css";
 import "./styles/style.css";
 
@@ -17,18 +18,33 @@ function retrieve_theme() {
 }
 
 (function () {
-  let data = new DOMParser().parseFromString(indexPage, "text/html");
-  document.getElementById("app")?.appendChild(data.documentElement);
-
+  // Setting page and handler
+  renderPage(location.pathname, null);
   retrieve_theme();
 
   window.addEventListener(
-    "storage",
-    function () {
-      retrieve_theme();
+    "popstate",
+    () => {
+      renderPage(location.pathname, null);
     },
     false
   );
+
+  document.querySelectorAll<HTMLAnchorElement>("nav li a").forEach((link) => {
+    if (link.href == "javascript:void(0)") {
+      return;
+    }
+
+    link.onclick = (ev) => {
+      ev.preventDefault();
+
+      let target = ev.target as HTMLAnchorElement;
+      let url = new URL(target.href);
+
+      renderPage(url.pathname, location.pathname);
+      history.pushState({}, "", url.pathname);
+    };
+  });
 
   document.getElementById("special-mode")?.addEventListener("click", (ev) => {
     ev.preventDefault();

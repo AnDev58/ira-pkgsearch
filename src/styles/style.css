@@ -1,7 +1,12 @@
 /* Basics */
 
 * {
-  transition: background-color 0.5s ease, color 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#app.pre-animation {
+  opacity: 0;
+  max-height: 0;
 }
 
 a {
