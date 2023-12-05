@@ -8,6 +8,18 @@ let icon = document.querySelector<HTMLSpanElement>(
   "#special-mode>.material-symbols-outlined"
 )!;
 
+function themeSwitchHandler(ev: MouseEvent) {
+  ev.preventDefault();
+  document.body.classList.toggle("dark_mode");
+
+  if (document.body.classList.contains("dark_mode")) {
+    localStorage.setItem("color_scheme", "dark");
+  } else {
+    localStorage.setItem("color_scheme", "light");
+  }
+  icon.textContent = localStorage.getItem("color_scheme") + "_mode";
+}
+
 function retrieveTheme() {
   var theme = localStorage.getItem("color_scheme");
   if (theme != null) {
@@ -18,8 +30,8 @@ function retrieveTheme() {
   }
 }
 
+// The ONLY entry point
 (function () {
-  // Setting page and handler
   retrieveTheme();
   renderPage(location.pathname, null);
 
@@ -47,15 +59,7 @@ function retrieveTheme() {
     };
   });
 
-  document.getElementById("special-mode")?.addEventListener("click", (ev) => {
-    ev.preventDefault();
-    document.body.classList.toggle("dark_mode");
-
-    if (document.body.classList.contains("dark_mode")) {
-      localStorage.setItem("color_scheme", "dark");
-    } else {
-      localStorage.setItem("color_scheme", "light");
-    }
-    icon.textContent = localStorage.getItem("color_scheme") + "_mode";
-  });
+  document
+    .getElementById("special-mode")
+    ?.addEventListener("click", themeSwitchHandler);
 })();
