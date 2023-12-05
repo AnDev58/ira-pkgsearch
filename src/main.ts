@@ -1,13 +1,14 @@
-import { renderPage } from "./utils/spa";
+import { renderPage } from "./routes/spa";
 
 import "./styles/color.css";
 import "./styles/style.css";
+import "./styles/forms.css";
 
 let icon = document.querySelector<HTMLSpanElement>(
   "#special-mode>.material-symbols-outlined"
 )!;
 
-function retrieve_theme() {
+function retrieveTheme() {
   var theme = localStorage.getItem("color_scheme");
   if (theme != null) {
     document.body.classList.remove("light_mode", "dark_mode");
@@ -19,8 +20,8 @@ function retrieve_theme() {
 
 (function () {
   // Setting page and handler
+  retrieveTheme();
   renderPage(location.pathname, null);
-  retrieve_theme();
 
   window.addEventListener(
     "popstate",

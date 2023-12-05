@@ -1,25 +1,43 @@
 <div class="form-container">
   <form id="form-login" action="#" method="post">
     <h2>Log in</h2>
-    <label for="login-login">Username: </label>
-    <input type="text" id="login-login" required />
-    <label for="login-password">Password: </label>
-    <input type="password" id="login-password" required />
-    <input type="submit" />
+    <table>
+      <tr>
+        <th><label for="login-login">Username</label></th>
+        <td><input type="text" id="login-login" required /></td>
+      </tr>
+      <tr>
+        <th><label for="login-password">Password</label></th>
+        <td><input type="password" id="login-password" required /></td>
+      </tr>
+    </table>
+    <input type="submit" value="Log in" />
   </form>
 
-  <form id="form-singup" action="#" method="post">
+  <form id="form-singup" hidden action="#" method="post">
     <h2>Sing up</h2>
-    <label for="singup-name">Name: </label>
-    <input id="singup-name" required />
-    <label for="singup-age">Age: </label>
-    <input type="number" id="singup-age" required />
-    <label for="singup-login">Username: </label>
-    <input type="text" id="singup-login" required />
-    <label for="singup-password">Password: </label>
-    <input type="password" id="singup-password" required />
-    <label for="singup-password-repeat">Password repeat: </label>
-    <input type="password" id="singup-password-repeat" required />
-    <input type="submit" />
+    <table>
+      <tr>
+        <th><label for="singup-name">Name</label></th>
+        <td><input id="singup-name" required /></td>
+      </tr>
+      <tr>
+        <th><label for="singup-age">Age</label></th>
+        <td><input type="number" id="singup-age" required /></td>
+      </tr>
+
+      <th><label for="singup-login">Username</label></th>
+      <td><input type="text" id="singup-login" required /></td>
+      <tr>
+        <th><label for="singup-password">Password</label></th>
+        <td><input type="password" id="singup-password" required /></td>
+      </tr>
+      <tr>
+        <th><label for="singup-password-repeat">Password repeat</label></th>
+        <td><input type="password" id="singup-password-repeat" required /></td>
+      </tr>
+    </table>
+    <input type="submit" value="Sing up" />
   </form>
+  <button id="login-singup-switcher"><span>Switch to sing up</span></button>
 </div>
