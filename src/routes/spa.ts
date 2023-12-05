@@ -2,66 +2,68 @@ import indexPage from "../pages/index.htm?raw";
 import aboutPage from "../pages/about.htm?raw";
 import notFoundPage from "../pages/404.htm?raw";
 import { renderLoginSingupPage, renderStaticPage } from "./renders";
+import { Listener, PageInfo, RenderFunc } from "./types/render";
 
-const routes = {
+// Structure: {"url": ["navbar's anchor ID, if present, or null otherwhise", RenderFunc]}
+export const routes = {
   "/": ["nav-index", renderStaticPage(indexPage)],
   "/about": ["nav-about", renderStaticPage(aboutPage)],
   "/account": ["nav-account", renderLoginSingupPage()],
 };
 
-export function renderPage(
-  path: string,
-  previousPath: string | null,
-  windowResizeHandler?: (ev?: UIEvent) => any
-) {
-  let useAnimation = previousPath != path && previousPath != null;
-  let page: NodeListOf<Node>;
-  let activeLinkID: string | undefined = undefined;
-
-  if (windowResizeHandler) {
-    window.onresize = windowResizeHandler;
-  }
-
-  if (path in routes) {
-    let pageInfo = routes[path as keyof typeof routes];
-    activeLinkID = pageInfo[0] as string;
-    page = (pageInfo[1] as renderFunc)(windowResizeHandler);
-  } else {
-    page = renderStaticPage(notFoundPage)();
-    useAnimation = false;
-  }
+export function renderPage(path: string, useAnimation: boolean) {
+  let pageInfo: PageInfo;
 
   document.querySelector("nav .active")?.classList.remove("active");
-  if (activeLinkID) {
-    document.getElementById(activeLinkID)!.classList.add("active");
+
+  if (path in routes) {
+    // Known URL
+    const pageRoute = routes[path as keyof typeof routes];
+    pageInfo = (pageRoute[1] as RenderFunc)();
+
+    if (pageRoute[0]) {
+      // Special visual effect - active status of link
+      document.getElementById(pageRoute[0] as string)?.classList.add("active");
+    }
+  } else {
+    // Unknown URL, need 404 page
+    pageInfo = renderStaticPage(notFoundPage)();
+
+    useAnimation = false; // Special visual effect - no animation
   }
 
-  clonePage(page, useAnimation);
+  clonePage(pageInfo, useAnimation);
 }
 
-export type renderFunc = (
-  windowResizeHandler?: (ev?: UIEvent) => any
-) => NodeListOf<Node>;
-
-function clonePage(nodes: NodeListOf<Node>, useAnimation: boolean) {
+function clonePage(pageInfo: PageInfo, useAnimation: boolean) {
   let destination = document.getElementById("app")!;
 
   destination.childNodes.forEach((child) => child.remove());
 
-  let copy = () =>
-    nodes.forEach(function (element) {
-      let clonedElement = element.cloneNode(true);
-      destination.appendChild(clonedElement);
-    });
-
   if (!useAnimation) {
-    copy();
+    copyNodes(pageInfo, destination);
     return;
   }
 
   destination.classList.add("pre-animation");
   setTimeout(() => {
-    copy();
+    copyNodes(pageInfo, destination);
     destination.classList.remove("pre-animation");
   }, 200);
+}
+
+function copyNodes(pageInfo: PageInfo, destination: HTMLElement) {
+  pageInfo.nodes.forEach(function (element) {
+    const clonedElement = element.cloneNode(true) as HTMLElement;
+    destination.appendChild(clonedElement);
+  });
+  addAllEventListeners(pageInfo.listeners);
+}
+
+function addAllEventListeners(listeners: Listener[]) {
+  listeners.forEach((listener) => {
+    document
+      .querySelector("#app " + listener.elementSelector)!
+      .addEventListener(listener.name, listener.listener);
+  });
 }
