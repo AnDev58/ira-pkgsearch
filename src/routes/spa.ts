@@ -2,13 +2,21 @@ import indexPage from "../pages/index.htm?raw";
 import aboutPage from "../pages/about.htm?raw";
 import notFoundPage from "../pages/404.htm?raw";
 import { renderLoginSingupPage, renderStaticPage } from "./renders";
-import { Listener, PageInfo, RenderFunc } from "./types/render";
+import { Listener, PageInfo } from "./types/render";
 
-// Structure: {"url": [ID of link to be active, if present, or null otherwhise, RenderFunc]}
 export const routes = {
-  "/": ["nav-index", renderStaticPage(indexPage)],
-  "/about": ["nav-about", renderStaticPage(aboutPage)],
-  "/account": ["nav-account", renderLoginSingupPage()],
+  "/": {
+    activeLinkID: "nav-index", // "" if don't have
+    renderFunc: renderStaticPage(indexPage),
+  },
+  "/about": {
+    activeLinkID: "nav-about",
+    renderFunc: renderStaticPage(aboutPage),
+  },
+  "/account": {
+    activeLinkID: "nav-account",
+    renderFunc: renderLoginSingupPage(),
+  },
 };
 
 export function renderPage(path: string, useAnimation: boolean) {
@@ -19,11 +27,11 @@ export function renderPage(path: string, useAnimation: boolean) {
   if (path in routes) {
     // Known URL
     const pageRoute = routes[path as keyof typeof routes];
-    pageInfo = (pageRoute[1] as RenderFunc)();
+    pageInfo = pageRoute.renderFunc();
 
-    if (pageRoute[0]) {
+    if (pageRoute.activeLinkID !== "") {
       // Special visual effect - active status of link
-      document.getElementById(pageRoute[0] as string)?.classList.add("active");
+      document.getElementById(pageRoute.activeLinkID)?.classList.add("active");
     }
   } else {
     // Unknown URL, need 404 page
