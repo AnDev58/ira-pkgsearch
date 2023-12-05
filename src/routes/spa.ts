@@ -4,7 +4,7 @@ import notFoundPage from "../pages/404.htm?raw";
 import { renderLoginSingupPage, renderStaticPage } from "./renders";
 import { Listener, PageInfo, RenderFunc } from "./types/render";
 
-// Structure: {"url": ["navbar's anchor ID, if present, or null otherwhise", RenderFunc]}
+// Structure: {"url": [ID of link to be active, if present, or null otherwhise, RenderFunc]}
 export const routes = {
   "/": ["nav-index", renderStaticPage(indexPage)],
   "/about": ["nav-about", renderStaticPage(aboutPage)],
