@@ -3,6 +3,11 @@ label {
   display: inline-block;
 }
 
+search {
+  margin: 0 auto;
+  text-align: center;
+}
+
 input[type="submit"],
 button,
 input[type="button"],
@@ -13,17 +18,22 @@ input[type="image"] {
   cursor: pointer;
 }
 
+input:not([type="submit"]),
+textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
 .form-container {
   border-radius: 5px;
   padding: 8px;
   margin: 4px;
 
-  input:not([type="submit"]) {
+  input:not([type="submit"]),
+  textarea {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical;
   }
 
   input[type="submit"] {

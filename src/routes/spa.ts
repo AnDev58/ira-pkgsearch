@@ -1,6 +1,7 @@
 import indexPage from "../pages/index.htm?raw";
 import aboutPage from "../pages/about.htm?raw";
 import notFoundPage from "../pages/404.htm?raw";
+import searchPage from "../pages/search.htm?raw";
 import { renderLoginSingupPage, renderStaticPage } from "./renders";
 import { Listener, PageInfo } from "./types/render";
 
@@ -16,6 +17,10 @@ export const routes = {
   "/account": {
     activeLinkID: "nav-account",
     renderFunc: renderLoginSingupPage(),
+  },
+  "/search": {
+    activeLinkID: "nav-search",
+    renderFunc: renderStaticPage(searchPage),
   },
 };
 
