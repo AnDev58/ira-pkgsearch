@@ -1,0 +1,333 @@
+{
+  "ipkg": {
+    "version": "0.0.1",
+    "description": "A tool for maintaining IRA system",
+    "owner": "root",
+    "dependencies": {
+      "libsqlite3": "3.0.1",
+      "libcurl": "7.0",
+      "libc6": "2.34",
+      "golang": "1.20",
+      "libstdc++6": "12.2.0-14",
+      "libffi8": "3.4"
+    }
+  },
+  "libsqlite3": {
+    "version": "3.40.1-2",
+    "description": "Very light database written on C",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.34"
+    }
+  },
+  "libc6": {
+    "version": "2.36",
+    "description": "GNU C standard ibrary",
+    "owner": "root",
+    "dependencies": { "libgcc-s1": "" }
+  },
+  "libgcc-s1": {
+    "version": "12.2.0-14",
+    "description": "GNU C Compiler - support library",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.34",
+      "gcc-12-base": "=12.2.0-14"
+    }
+  },
+  "gcc-12-base": {
+    "version": "12.2.0-14",
+    "description": "GCC, the GNU Compiler Collection (base package)",
+    "owner": "root",
+    "dependencies": {}
+  },
+  "libcurl": {
+    "version": "7.88.1",
+    "description": "Easy-to-use client-side URL transfer library",
+    "owner": "root",
+    "dependencies": {
+      "libbrotli": "0.6.0",
+      "libc6": "2.34",
+      "libgssapi-krb5": "1.17",
+      "libidn": "0.6",
+      "libldap": "2.5.4",
+      "libnghttp2": "1.50.0",
+      "libpsl5": "0.16.0",
+      "librtmp": "2.3",
+      "libssh2": "1.7.0",
+      "libssl": "3.0.0",
+      "libzstd": "1.5.2",
+      "zlib": "1:1.1.4"
+    }
+  },
+  "libbrotli": {
+    "version": "1.0.9-2",
+    "description": "Library implementing brotli encoder and decoder",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.34"
+    }
+  },
+  "libgssapi-kr5": {
+    "version": "1.20.1",
+    "description": "MIT Kerberos runtime libraries - krb5 GSS-API Mechanism",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.33",
+      "libcom-err": "1.43.9",
+      "libk5crypto": "1.20",
+      "libkrb5": "=1.20.1",
+      "libkrb5support": "1.15~beta1"
+    }
+  },
+  "libcom-err": {
+    "version": "1.47.0-2",
+    "description": "Common error description library",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.17"
+    }
+  },
+  "libk5crypto": {
+    "version": "1.20.1",
+    "description": "MIT Kerberos runtime libraries - Crypto Library",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.33",
+      "libkrb5support": "1.20"
+    }
+  },
+  "libkrb5support": {
+    "version": "1.20.1-2",
+    "description": "MIT Kerberos runtime libraries - Support library",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.34"
+    }
+  },
+  "libkrb5": {
+    "version": "1.20.1-2",
+    "description": "MIT Kerberos runtime libraries",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.34",
+      "libcom-err": "1.43.9",
+      "libk5crypto": "1.20",
+      "libkeyutils": "1.5.9",
+      "libkrb5support": "=1.20.1-2",
+      "libssl": "3.0.0"
+    }
+  },
+  "libkeyutils": {
+    "version": "1.6.3-2",
+    "description": "Linux Key Management Utilities",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.14"
+    }
+  },
+  "libssl": {
+    "version": "3.0.11",
+    "description": "Secure Sockets Layer toolkit - shared libraries",
+    "owner": "root",
+    "dependencies": {
+      "libatomic": "4.8",
+      "libc6": "2.34"
+    }
+  },
+  "libatomic": {
+    "version": "12.2.0-14",
+    "description": "Support library providing __atomic built-in functions",
+    "owner": "root",
+    "dependencies": {
+      "gcc-12-base": "=12.2.0-14",
+      "libc6": "2.14"
+    }
+  },
+  "libidn": {
+    "version": "2.3.3-1",
+    "description": "Internationalized domain names (IDNA2008/TR46) library",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.14",
+      "libunistring2": "0.9.7"
+    }
+  },
+  "libunistring2": {
+    "version": "1.0-2",
+    "description": "Unicode string library for C",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.34"
+    }
+  },
+  "libldap": {
+    "version": "2.5.0",
+    "description": "OpenLDAP libraries",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.34",
+      "libgnutls": "3.7.5",
+      "libsasl": "2.1.28"
+    }
+  },
+  "libgnutls": {
+    "version": "3.7.9-2",
+    "description": "GNU TLS library - main runtime library",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.34",
+      "libgmp": "2:6.2.1",
+      "libhogweed6": "3.6",
+      "libidn": "2.0",
+      "libnettle8": "3.7~",
+      "libp11-kit": "0.23.18.1",
+      "libtasn": "4.14",
+      "libunistring2": "0.9.7"
+    }
+  },
+  "libgmp": {
+    "version": "2:6.2.1",
+    "description": "Multiprecision arithmetic library",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.14"
+    }
+  },
+  "libhogweed6": {
+    "version": "3.8.1-2",
+    "description": "Low level cryptographic library (public-key cryptos)",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.14",
+      "libnettle8": ""
+    }
+  },
+  "libnettle8": {
+    "version": "3.8.1-2",
+    "description": "Low level cryptographic library (symmetric and one-way cryptos)",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.17"
+    }
+  },
+  "libp11-kit": {
+    "version": "3.8.1-2",
+    "description": "Library for loading and coordinating access to PKCS#11 modules - runtime",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.34",
+      "libffi8": "3.4"
+    }
+  },
+  "libffi8": {
+    "version": "3.4.4-1",
+    "description": "Foreign Function Interface library runtime",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.34",
+      "libgcc-s1": "3.5"
+    }
+  },
+  "libtasn": {
+    "version": "4.19.0-2",
+    "description": "Manage ASN.1 structures (runtime)",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.14"
+    }
+  },
+  "libsasl": {
+    "version": "2.1.28",
+    "description": "Cyrus SASL - authentication abstraction library",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.34",
+      "libsasl-modules-db": "2.1.28"
+    }
+  },
+  "libsasl-modules-db": {
+    "version": "2.1.28",
+    "description": "Cyrus SASL - pluggable authentication modules (DB)",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.14",
+      "libdb": ""
+    }
+  },
+  "libdb": {
+    "version": "5.3.28",
+    "description": "Berkeley Database Libraries [runtime]",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.34"
+    }
+  },
+  "libpsl5": {
+    "version": "0.21.2-1",
+    "description": "Library for Public Suffix List (shared libraries)",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.33",
+      "libidn": "0.16",
+      "libunistring2": "0.9.7"
+    }
+  },
+  "librtmp": {
+    "version": "2.4",
+    "description": "Toolkit for RTMP streams (shared library)",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.14",
+      "libgmp": "",
+      "libgnutls": "3.6.14",
+      "libhogweed6": "",
+      "libnettle8": "",
+      "zlib": "1:1.1.4"
+    }
+  },
+  "zlib": {
+    "version": "1:1.2.13",
+    "description": "Compression library - runtime",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.14"
+    }
+  },
+  "libssh2": {
+    "version": "1.10.0-3",
+    "description": "SSH2 client-side library",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.14",
+      "libssl": "3.0.0",
+      "zlib": "1:1.1.4"
+    }
+  },
+  "libzstd": {
+    "version": "1.5.4",
+    "description": "Fast lossless compression algorithm",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.34"
+    }
+  },
+  "golang": {
+    "version": "1.21.1",
+    "description": "Go programming language",
+    "owner": "root",
+    "dependencies": {
+      "libc6": "2.34"
+    }
+  },
+  "libstdc++6": {
+    "version": "12.2.0-14",
+    "description": "GNU Standard C++ Library v3",
+    "owner": "root",
+    "dependencies": {
+      "gcc-12-base": "=12.2.0-14",
+      "libc6": "2.36",
+      "libgcc-s1": "4.2"
+    }
+  }
+}

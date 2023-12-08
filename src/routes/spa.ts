@@ -1,8 +1,11 @@
 import indexPage from "../pages/index.htm?raw";
 import aboutPage from "../pages/about.htm?raw";
 import notFoundPage from "../pages/404.htm?raw";
-import searchPage from "../pages/search.htm?raw";
-import { renderLoginSingupPage, renderStaticPage } from "./renders";
+import {
+  renderLoginSingupPage,
+  renderSearchPage,
+  renderStaticPage,
+} from "./renders";
 import { Listener, PageInfo } from "./types/render";
 
 export const routes = {
@@ -20,7 +23,7 @@ export const routes = {
   },
   "/search": {
     activeLinkID: "nav-search",
-    renderFunc: renderStaticPage(searchPage),
+    renderFunc: renderSearchPage(),
   },
 };
 
@@ -51,18 +54,18 @@ export function renderPage(path: string, useAnimation: boolean) {
 function clonePage(pageInfo: PageInfo, useAnimation: boolean) {
   let destination = document.getElementById("app")!;
 
-  destination.childNodes.forEach((child) => child.remove());
-
   if (!useAnimation) {
+    destination.innerHTML = "";
     copyNodes(pageInfo, destination);
     return;
   }
 
   destination.classList.add("pre-animation");
   setTimeout(() => {
+    destination.innerHTML = "";
     copyNodes(pageInfo, destination);
     destination.classList.remove("pre-animation");
-  }, 200);
+  }, 300);
 }
 
 function copyNodes(pageInfo: PageInfo, destination: HTMLElement) {

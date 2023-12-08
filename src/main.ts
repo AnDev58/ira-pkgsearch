@@ -3,7 +3,7 @@ import { renderPage } from "./routes/spa";
 import "./styles/color.css";
 import "./styles/style.css";
 import "./styles/forms.css";
-import { retrieveTheme } from "./themes/basics";
+import { retrieveTheme, switchTheme } from "./themes/basics";
 
 // The ONLY entry point
 (function () {
@@ -41,21 +41,5 @@ import { retrieveTheme } from "./themes/basics";
 
   document
     .getElementById("special-dark-light-theme")
-    ?.addEventListener("click", themeSwitchHandler);
+    ?.addEventListener("click", switchTheme);
 })();
-
-let icon = document.querySelector<HTMLSpanElement>(
-  "#special-mode>.material-symbols-outlined"
-)!;
-
-function themeSwitchHandler(ev: MouseEvent) {
-  ev.preventDefault();
-  document.body.classList.toggle("dark_mode");
-
-  if (document.body.classList.contains("dark_mode")) {
-    localStorage.setItem("color_scheme", "dark");
-  } else {
-    localStorage.setItem("color_scheme", "light");
-  }
-  icon.textContent = localStorage.getItem("color_scheme") + "_mode";
-}

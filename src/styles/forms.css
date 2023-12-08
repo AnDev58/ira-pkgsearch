@@ -3,11 +3,6 @@ label {
   display: inline-block;
 }
 
-search {
-  margin: 0 auto;
-  text-align: center;
-}
-
 input[type="submit"],
 button,
 input[type="button"],
@@ -21,7 +16,8 @@ input[type="image"] {
 input:not([type="submit"]),
 textarea {
   padding: 12px;
-  border: 1px solid #ccc;
+  border-width: 1px;
+  border-style: solid;
   border-radius: 4px;
   resize: vertical;
 }
@@ -44,6 +40,7 @@ textarea {
     width: 100%;
     height: 100%;
     margin-bottom: 30px;
+    border: 0;
     th {
       width: 25%;
       padding: 0;
@@ -67,5 +64,14 @@ textarea {
     position: fixed;
     top: 50%;
     right: 10vw;
+  }
+}
+
+search {
+  margin-bottom: 12px;
+  text-align: center;
+
+  input[type="search"] {
+    width: 100%;
   }
 }
