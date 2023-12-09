@@ -1,3 +1,4 @@
+import { openModal, setupModalWindow } from "../components/ts/modal";
 import { PackageModel } from "../models/packages";
 import logInPage from "../pages/login.htm?raw";
 import searchPage from "../pages/search.htm?raw";
@@ -62,6 +63,8 @@ export function renderSearchPage(): RenderFunc {
           listener: searchPackageHandler,
         },
       ],
+      postRender: (page) =>
+        setupModalWindow(page.querySelector<HTMLDivElement>("#pkg-details")!),
     };
   };
 }
@@ -91,7 +94,7 @@ function changeLoginSingupSwitcher(where: Document) {
   }
 }
 
-function searchPackageHandler() {
+async function searchPackageHandler() {
   const tableBody = document.querySelector<HTMLTableSectionElement>(
     "#search-results tbody"
   )!;
@@ -106,7 +109,9 @@ function searchPackageHandler() {
   if (searchField.value.length <= 1) {
     return;
   }
-  const pkgs: PackageModel.Package[] = PackageModel.search(searchField.value);
+  const pkgs: PackageModel.Package[] = await PackageModel.search(
+    searchField.value
+  );
   pkgs.forEach((pkg) => {
     const article = buildResultArticle(pkg);
     tableBody.appendChild(article[0]);
@@ -157,7 +162,7 @@ function changeVisibility(where: Document) {
   section.hidden = !table.hidden;
 }
 
-function showPackageDetails(ev: MouseEvent, pkg: PackageModel.Package) {
+function showPackageDetails(ev: MouseEvent, _: PackageModel.Package) {
   ev.preventDefault();
-  alert(pkg.owner);
+  openModal("pkg-details");
 }

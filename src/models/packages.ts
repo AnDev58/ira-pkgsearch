@@ -1,5 +1,3 @@
-import packageDB from "./db/packages.json";
-
 export namespace PackageModel {
   export class Package {
     name: string;
@@ -19,7 +17,8 @@ export namespace PackageModel {
       this.owner = owner;
     }
   }
-  export function search(query: string, useDescription: boolean = true) {
+  export async function search(query: string, useDescription: boolean = true) {
+    const packageDB = (await import("./db/packages.json")).default;
     const result: Package[] = [];
     (Object.keys(packageDB) as (keyof typeof packageDB)[]).forEach(
       (pkgName) => {

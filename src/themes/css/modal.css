@@ -1,0 +1,12 @@
+/* Palette */
+:root {
+  --modal-bg: #efefef;
+}
+.dark_mode {
+  --modal-bg: #202523;
+}
+
+/* Modal window styles */
+.modal-content {
+  background-color: var(--modal-bg);
+}

@@ -74,6 +74,9 @@ function copyNodes(pageInfo: PageInfo, destination: HTMLElement) {
     destination.appendChild(clonedElement);
   });
   addAllEventListeners(pageInfo.listeners);
+  if (pageInfo.postRender) {
+    pageInfo.postRender(destination);
+  }
 }
 
 function addAllEventListeners(listeners: Listener[]) {

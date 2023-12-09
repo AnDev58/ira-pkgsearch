@@ -1,0 +1,36 @@
+/* Palette */
+:root {
+  --nav-bg: #dadada;
+  --nav-active-bg: #aa2222;
+  --nav-hover-bg: #777777;
+  --nav-active-fg: #fcfcfc;
+  --nav-inactive-fg: #222222;
+}
+
+.dark_mode {
+  --nav-bg: #444;
+  --nav-hover-bg: #e3e3e3;
+  --nav-active-bg: #b55;
+  --nav-active-fg: #252525;
+  --nav-inactive-fg: #f5f5f5;
+}
+
+/* Navigation bar's colors */
+
+nav {
+  background-color: var(--nav-bg);
+}
+
+nav li a {
+  color: var(--nav-inactive-fg);
+}
+
+nav li a:hover:not(.active) {
+  background-color: var(--nav-hover-bg);
+  color: var(--nav-active-fg);
+}
+
+nav li a.active {
+  background-color: var(--nav-active-bg);
+  color: var(--nav-active-fg);
+}

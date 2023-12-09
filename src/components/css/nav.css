@@ -1,0 +1,60 @@
+nav {
+  position: fixed;
+  height: 100%;
+  width: 25%;
+  top: 0;
+  left: 0;
+  overflow: auto;
+}
+
+nav > ul {
+  list-style-type: none;
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+nav li a {
+  display: block;
+  padding: 8px 16px;
+  height: 100%;
+}
+
+@media screen and (max-width: 900px) {
+  nav {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+  nav li {
+    float: left;
+  }
+
+  nav li a {
+    padding: 15px;
+  }
+
+  nav li.right {
+    float: right;
+    list-style-type: inherit;
+  }
+
+  header,
+  #app {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  nav li {
+    float: none;
+  }
+
+  nav li a {
+    text-align: center;
+  }
+
+  nav li.right {
+    float: none;
+  }
+}

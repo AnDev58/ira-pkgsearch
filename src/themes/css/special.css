@@ -1,0 +1,21 @@
+/* Palette */
+:root {
+  --special-bg: #e2e3f3;
+  --special-border: #d4d4d4;
+}
+
+.dark_mode {
+  --special-bg: #363646;
+  --special-border: #4b4b4b;
+}
+
+/* Special blocks' colors */
+#search-results article,
+.form-container {
+  background-color: var(--special-bg);
+  border: 1px solid var(--special-border);
+
+  table tr {
+    background-color: inherit;
+  }
+}

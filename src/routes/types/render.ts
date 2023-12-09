@@ -11,4 +11,5 @@ export type Listener = {
 export type PageInfo = {
   nodes: NodeListOf<Node>;
   listeners: Listener[];
+  postRender?: (page: HTMLElement) => void;
 };

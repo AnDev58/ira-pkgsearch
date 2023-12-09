@@ -1,14 +1,25 @@
-import { renderPage } from "./routes/spa";
-
-import "./styles/color.css";
-import "./styles/style.css";
+import "./themes/css/basic.css";
+import "./themes/css/nav.css";
+import "./themes/css/special.css";
+import "./themes/css/modal.css";
 import "./styles/forms.css";
+import "./styles/style.css";
+import "./components/css/nav.css";
+import "./components/css/modal.css";
+
+import { renderPage } from "./routes/spa";
 import { retrieveTheme, switchTheme } from "./themes/basics";
+import { enableNavbar } from "./components/ts/nav";
+import { modalFirstSetup } from "./components/ts/modal";
 
 // The ONLY entry point
 (function () {
   retrieveTheme();
   renderPage(location.pathname, false);
+
+  // Setting up components
+  modalFirstSetup();
+  enableNavbar((place) => renderPage(place, true));
 
   window.addEventListener(
     "popstate",
@@ -17,27 +28,6 @@ import { retrieveTheme, switchTheme } from "./themes/basics";
     },
     false
   );
-
-  // Making navigation bar work
-  document.querySelectorAll<HTMLAnchorElement>("nav li a").forEach((link) => {
-    if (link.href == "javascript:void(0)") {
-      return;
-    }
-
-    link.onclick = (ev) => {
-      ev.preventDefault();
-
-      if (link.classList.contains("active")) {
-        return;
-      }
-
-      let target = ev.target as HTMLAnchorElement;
-      let url = new URL(target.href);
-
-      renderPage(url.pathname, true);
-      history.pushState({}, "", url.pathname);
-    };
-  });
 
   document
     .getElementById("special-dark-light-theme")
