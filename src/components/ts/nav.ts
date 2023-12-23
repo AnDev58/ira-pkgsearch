@@ -15,7 +15,8 @@ export function enableNavbar(renderPage: (place: string) => void) {
       let url = new URL(target.href);
 
       renderPage(url.pathname);
-      history.pushState({}, "", url.pathname);
+      let base = import.meta.env.PROD ? "/ira-pkgsearch" : "";
+      history.pushState({}, "", base + url.pathname);
     };
   });
 }
