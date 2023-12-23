@@ -28,11 +28,10 @@ jobs:
         with:
           node-version: 18
           cache: yarn
-          cache-dependency-path: yarn.lock
       - name: Install dependencies
-        run: npm install
+        run: yarn
       - name: Build
-        run: npm run build
+        run: yarn build
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v4
       - name: Upload GitHub Pages artifact
