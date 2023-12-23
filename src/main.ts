@@ -12,10 +12,15 @@ import { retrieveTheme, switchTheme } from "./themes/basics";
 import { enableNavbar } from "./components/ts/nav";
 import { modalFirstSetup } from "./components/ts/modal";
 
+let getPathname = () =>
+  import.meta.env.PROD
+    ? location.pathname.replace(/^(\/ira-pkgsearch\.)/, "")
+    : location.pathname;
+
 // The ONLY entry point
 (function () {
   retrieveTheme();
-  renderPage(location.pathname, false);
+  renderPage(getPathname(), false);
 
   // Setting up components
   modalFirstSetup();
@@ -24,7 +29,7 @@ import { modalFirstSetup } from "./components/ts/modal";
   window.addEventListener(
     "popstate",
     () => {
-      renderPage(location.pathname, false);
+      renderPage(getPathname(), false);
     },
     false
   );
