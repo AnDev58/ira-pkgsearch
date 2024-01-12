@@ -14,7 +14,7 @@ func (s *Server) CreatePackageHandler(w http.ResponseWriter, r *http.Request) {
 		Name         string           `json:"name"`
 		Version      string           `json:"version"`
 		Dependencies []RequestPackage `json:"deps"`
-		File         string           `json:"ipkg"`
+		File         json.RawMessage  `json:"ipkg"`
 	}
 
 	if util.EnforceJSON(w, r) {
