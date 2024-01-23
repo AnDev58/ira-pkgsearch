@@ -1,3 +1,4 @@
+// Package util provides special features for a programmer
 package util
 
 import (
@@ -8,16 +9,18 @@ import (
 	"github.com/andev58/ira-pkgsearch/backend/constants"
 )
 
+// GetServerStage gets server stage from environment or defaultStage if not present.
+// Return a Stage constant
 func GetServerStage(defaultStage int) int {
 	stage := defaultStage
 	if mode, ok := os.LookupEnv("MODE"); ok {
 		switch mode {
 		case "DEVELOPMENT":
-			stage = constants.STAGE_DEV
+			stage = constants.StageDev
 		case "TEST":
-			stage = constants.STAGE_TEST
+			stage = constants.StageTest
 		case "PRODUCTION":
-			stage = constants.STAGE_PROD
+			stage = constants.StageProd
 		default:
 			log.Fatal("incorrect MODE value")
 		}
@@ -25,6 +28,7 @@ func GetServerStage(defaultStage int) int {
 	return stage
 }
 
+// GetPort gets port from environment or defaultPort otherway
 func GetPort(defaultPort int) int {
 	portNumber := defaultPort
 

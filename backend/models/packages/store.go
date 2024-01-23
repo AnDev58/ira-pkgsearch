@@ -1,4 +1,6 @@
-package packages
+// Package packages describes package storage which is a modification of [github.com/IRA-Package-Manager/goremote/util].Package
+// It also specifies rules of storaging and naming packages
+package packages // import models/packages
 
 import (
 	"encoding/json"
@@ -12,6 +14,7 @@ import (
 	goremote "github.com/IRA-Package-Manager/goremote/util"
 )
 
+// PackageStore present a local package storage
 type PackageStore struct {
 	sync.Mutex
 
@@ -19,6 +22,9 @@ type PackageStore struct {
 	pkgDir string
 }
 
+// NewPackageStore creates a new package storage
+// pkgDir is a directory where PackageStore exists or need to be created
+// Returns created PackageStore or error
 func NewPackageStore(pkgDir string) (*PackageStore, error) {
 	ps := &PackageStore{pkgDir: pkgDir, pkgsDb: make(map[string][]goremote.Package)}
 
@@ -56,6 +62,9 @@ func NewPackageStore(pkgDir string) (*PackageStore, error) {
 	return ps, nil
 }
 
+// CreatePackage add IPKG in PackageStore
+// pkg is a goremote/util.Package containing configuration
+// ipkg is an IPKG file need to be saved
 func (ps *PackageStore) CreatePackage(pkg goremote.Package, ipkg []byte) error {
 	ps.Lock()
 	defer ps.Unlock()
@@ -99,6 +108,7 @@ func (ps *PackageStore) CreatePackage(pkg goremote.Package, ipkg []byte) error {
 	return nil
 }
 
+// Exists check if package (name, version) exists in PackageStore
 func (ps *PackageStore) Exists(name, version string) bool {
 	if pkgs, ok := ps.pkgsDb[name]; ok {
 		return slices.IndexFunc(
@@ -111,6 +121,7 @@ func (ps *PackageStore) Exists(name, version string) bool {
 	return false
 }
 
+// CreateFileName generates unique server file name for package (name, version)
 func (ps *PackageStore) CreateFileName(name, version string) string {
-	return fmt.Sprintf("%s-v%s-%d.json", name, version, (len(name)+len(version))*rand.Int())
+	return fmt.Sprintf("%s-v%s-%d.ipkg", name, version, (len(name)+len(version))*rand.Int())
 }

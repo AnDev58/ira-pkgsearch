@@ -1,3 +1,4 @@
+// Package controllers set a default controllers
 package controllers
 
 import (
@@ -8,6 +9,7 @@ import (
 	"runtime"
 )
 
+// VersionPageHandler print version of each used program in browser
 func VersionPageHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Go version: %s\n", runtime.Version())
 
@@ -17,7 +19,7 @@ func VersionPageHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Fprintf(w, "NodeJS version: %s", node)
 
-	yarn, err := exec.Command("node", "-v").Output()
+	yarn, err := exec.Command("npx", "yarn", "-v").Output()
 	if err != nil {
 		log.Fatal(err)
 	}

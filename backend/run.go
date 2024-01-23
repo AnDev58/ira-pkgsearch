@@ -1,3 +1,4 @@
+// Package backend is an entry point for a full server
 package backend
 
 import (
@@ -14,12 +15,14 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// Run starts server whih stage defaultStage (if nothing said in environmental variables) on socket address with a specified
+// TLS certFile and keyFile. For storing packages it use directory pkgDir
 func Run(defaultStage int, address string, certFile, keyFile string, pkgDir string) {
 	router := mux.NewRouter()
 	router.StrictSlash(true)
 
 	stage := util.GetServerStage(defaultStage)
-	if stage == constants.STAGE_DEV {
+	if stage == constants.StageDev {
 		router.HandleFunc("/dev/version", controllers.VersionPageHandler).Methods("GET")
 	}
 
@@ -43,7 +46,7 @@ func listenAndServeTLS(srv *http.Server, certFile, keyFile string, stage int) {
 		log.Fatal(err)
 	}
 
-	if stage == constants.STAGE_PROD {
+	if stage == constants.StageProd {
 		log.Println("Succesifully started the production server")
 	} else {
 		realAddr := srv.Addr

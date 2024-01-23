@@ -1,3 +1,4 @@
+// Package packages set controllers for packages model
 package packages
 
 import (
@@ -9,6 +10,7 @@ import (
 	"github.com/andev58/ira-pkgsearch/backend/util"
 )
 
+// CreatePackageHandler is a RESTful wrapper for store.CreatePackage
 func (s *Server) CreatePackageHandler(w http.ResponseWriter, r *http.Request) {
 	type RequestPackage struct {
 		Name         string           `json:"name"`
