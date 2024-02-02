@@ -11,13 +11,14 @@ import (
 	"github.com/andev58/ira-pkgsearch/backend/constants"
 	controllers "github.com/andev58/ira-pkgsearch/backend/controllers/other"
 	"github.com/andev58/ira-pkgsearch/backend/controllers/packages"
+	"github.com/andev58/ira-pkgsearch/backend/db"
 	"github.com/andev58/ira-pkgsearch/backend/util"
 	"github.com/gorilla/mux"
 )
 
 // Run starts server whih stage defaultStage (if nothing said in environmental variables) on socket address with a specified
 // TLS certFile and keyFile. For storing packages it use directory pkgDir
-func Run(defaultStage int, address string, certFile, keyFile string, pkgDir string) {
+func Run(defaultStage int, address string, certFile, keyFile string, pkgDir string, dbInfo db.DBInfo) {
 	router := mux.NewRouter()
 	router.StrictSlash(true)
 

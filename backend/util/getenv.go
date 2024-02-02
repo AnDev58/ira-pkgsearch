@@ -7,7 +7,28 @@ import (
 	"strconv"
 
 	"github.com/andev58/ira-pkgsearch/backend/constants"
+	"github.com/andev58/ira-pkgsearch/backend/db"
 )
+
+// GetDBInfo gets all info for DBInfo
+func GetDBInfo(dbInfo db.DBInfo) db.DBInfo {
+	if host, ok := os.LookupEnv("DB_HOST"); ok {
+		dbInfo.Host = host
+	}
+	if port, ok := os.LookupEnv("DB_PORT"); ok {
+		dbInfo.Port, _ = strconv.Atoi(port)
+	}
+	if user, ok := os.LookupEnv("DB_USER"); ok {
+		dbInfo.User = user
+	}
+	if password, ok := os.LookupEnv("DB_PWD"); ok {
+		dbInfo.Password = password
+	}
+	if dbName, ok := os.LookupEnv("DB_NAME"); ok {
+		dbInfo.Name = dbName
+	}
+	return dbInfo
+}
 
 // GetServerStage gets server stage from environment or defaultStage if not present.
 // Return a Stage constant
