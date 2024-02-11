@@ -2,12 +2,11 @@
 package db
 
 import (
-	"database/sql"
-
-	_ "github.com/lib/pq" // DB driver
+	_ "github.com/jackc/pgx/v5/stdlib" // DB driver
+	"github.com/jmoiron/sqlx"
 )
 
 // Connect sets connection to database by specified DBInfo
-func Connect(info DBInfo) (*sql.DB, error) {
-	return sql.Open("postgres", info.String())
+func Connect(info DBInfo) (*sqlx.DB, error) {
+	return sqlx.Connect("pgx", info.String())
 }

@@ -19,5 +19,5 @@ func (db DBInfo) String() string {
 	if db.SSL {
 		ssl = "enable"
 	}
-	return fmt.Sprintf("host=%s port=%d user=%s password=%s sslmode=%s", db.Host, db.Port, db.User, db.Password, ssl)
+	return fmt.Sprintf("host=%s port=%d user=%s password=%s sslmode=%s dbname=%s", db.Host, db.Port, db.User, db.Password, ssl, db.Name)
 }
